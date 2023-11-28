@@ -8,7 +8,6 @@ const Routes = [
   {
     path: "r/:subreddit/:filter?",
     loader: homeLoader,
-
     Component: Home,
   },
   {
