@@ -115,19 +115,17 @@ function Home() {
           <>
             {threadList.map(({ data: threadItem }, key) => {
               return (
-                <>
-                  <ThreadCard
-                    view={activeView}
-                    key={`${key}-${threadItem.id}`}
-                    subRedditName={data.details.subRedditName}
-                    title={threadItem.title}
-                    totalComments={threadItem.num_comments}
-                    author={threadItem.author}
-                    upvotesTotal={threadItem.ups}
-                    threadId={threadItem.id}
-                    createdDate={buildCreatedDate(threadItem.created_utc)}
-                  />
-                </>
+                <ThreadCard
+                  view={activeView}
+                  key={`${key}-${threadItem.id}`}
+                  subRedditName={data.details.subRedditName}
+                  title={threadItem.title}
+                  totalComments={threadItem.num_comments}
+                  author={threadItem.author}
+                  upvotesTotal={threadItem.ups}
+                  threadId={threadItem.id}
+                  createdDate={buildCreatedDate(threadItem.created_utc)}
+                />
               );
             })}
             {after !== null && (
