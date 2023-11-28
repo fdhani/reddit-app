@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 32px;
+
+    .voteUp {
+        user-select: none;
+        cursor: pointer;
+    }
+    .voteDown {
+        user-select: none;
+        cursor: pointer;
+    }
+
+    span {
+        text-align: center;
+        white-space: nowrap;
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &[data-vertical="true"] {
+        flex-direction: row;
+        width: 74px;
+        justify-content: space-between;
+    }
+}

@@ -54,8 +54,5 @@ export async function render(req) {
     </React.StrictMode>
   );
 
-  console.log({
-    html,
-  });
   return html;
 }

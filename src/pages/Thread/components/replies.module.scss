@@ -1,0 +1,27 @@
+.container {
+    border-left: 1px solid var(--gray-100);
+
+    &[data-noborder="true"] {
+        border-left: none;
+    }
+}
+
+.replyContainer {
+    background-color: #fbfbfb;
+    padding: 12px;
+    /* width: 100%; */
+    border-radius: 6px;
+    margin: 12px 0 12px -8px;
+
+    border: 1px solid var(--gray-100);
+    color: #202020;
+
+    .title {
+        font-size: 12px;
+        padding: 0 0 6px;
+    }
+
+    .body {
+        word-break: break-word;
+    }
+}

@@ -1,0 +1,108 @@
+// Classic View
+.containerClassic {
+    min-height: 70px;
+    display: block;
+    border-bottom: 1px solid var(--gray-100);
+    border-left: 1px solid var(--gray-100);
+    border-right: 1px solid var(--gray-100);
+    padding: 4px 8px 8px;
+    display: flex;
+
+    h1 {
+        margin-top: 6px;
+        margin-bottom: 6px;
+        font-size: 14px;
+    }
+    .info {
+        padding-left: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        font-size: 10px;
+    }
+
+    .txtPostInfo {
+        font-size: 10px;
+    }
+
+    &:first-child {
+        border-top: 1px solid var(--gray-100);
+    }
+}
+
+// Compact View
+.containerCompact {
+    min-height: 62px;
+    display: block;
+    padding: 4px 12px;
+    display: flex;
+    border-bottom: 1px solid var(--gray-100);
+    border-left: 1px solid var(--gray-100);
+    border-right: 1px solid var(--gray-100);
+
+    &:first-child {
+        border-top: 1px solid var(--gray-100);
+    }
+
+    h1 {
+        margin-top: 6px;
+        margin-bottom: 6px;
+        font-size: 13px;
+    }
+    .info {
+        padding-left: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer {
+        display: flex;
+        align-items: center;
+        font-size: 10px;
+        white-space: nowrap;
+        margin-left: auto;
+    }
+
+    .txtPostInfo {
+        font-size: 10px;
+    }
+}
+
+// Card View
+.containerCard {
+    min-height: 70px;
+    display: block;
+    border-radius: 4px;
+    border: 1px solid var(--gray-100);
+    margin: 8px 0;
+    padding: 4px 8px 8px;
+    display: flex;
+
+    h1 {
+        margin-top: 6px;
+        margin-bottom: 6px;
+        font-size: 14px;
+    }
+    .info {
+        padding-left: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        font-size: 10px;
+    }
+
+    .txtPostInfo {
+        font-size: 10px;
+    }
+}
+
