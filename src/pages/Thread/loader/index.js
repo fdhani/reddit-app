@@ -4,7 +4,6 @@ import { defer } from "react-router-dom";
 
 const loader = async ({ params }) => {
   if (canUseDOM) {
-    console.log("defered");
     return defer({
       comments: getThreadComments(params.subreddit, params.threadid),
     });

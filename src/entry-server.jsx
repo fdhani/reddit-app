@@ -1,15 +1,16 @@
 import React from "react";
-import ReactDOMServer from "react-dom/server";
-import Routes from "./pages";
+import { HelmetProvider } from "react-helmet-async";
 import {
   StaticRouterProvider,
   createStaticHandler,
   createStaticRouter,
 } from "react-router-dom/server";
+import ReactDOMServer from "react-dom/server";
+
+import Routes from "./pages";
 
 const createFetchRequest = (req) => {
   let origin = `${req.protocol}://${req.get("host")}`;
-  // Note: This had to take originalUrl into account for presumably vite's proxying
   let url = new URL(req.originalUrl || req.url, origin);
 
   let controller = new AbortController();
@@ -43,16 +44,22 @@ const createFetchRequest = (req) => {
 };
 
 export async function render(req) {
+  const helmetContext = {};
   let { dataRoutes, query } = createStaticHandler(Routes);
   let fetchRequest = createFetchRequest(req);
+
+  console.log("HelmetProvider", HelmetProvider);
+
   let context = await query(fetchRequest);
   const router = createStaticRouter(dataRoutes, context);
 
   const html = ReactDOMServer.renderToString(
     <React.StrictMode>
-      <StaticRouterProvider router={router} context={context} />
+      <HelmetProvider context={helmetContext}>
+        <StaticRouterProvider router={router} context={context} />
+      </HelmetProvider>
     </React.StrictMode>
   );
 
-  return html;
+  return { html, helmet: helmetContext?.helmet };
 }

@@ -47,8 +47,16 @@ async function createServer() {
 
       const appHtml = await render(req);
 
+      console.log("render", appHtml.html);
       // 5. Inject the app-rendered HTML into the template.
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      const headHtml = `
+        ${appHtml.helmet.title.toString()}
+        ${appHtml.helmet.meta.toString()}
+        ${appHtml.helmet.link.toString()}
+      `;
+      let html = template
+        .replace(`<!--ssr-outlet-->`, appHtml.html)
+        .replace(`<!--app-head-->`, headHtml);
 
       // 6. Send the rendered HTML back.
       res.status(200).set({ "Content-Type": "text/html" }).end(html);

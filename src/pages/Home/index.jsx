@@ -4,10 +4,10 @@ import buildCreatedDate from "../../factories/buildCreatedDate";
 import { useEffect, useMemo, useState } from "react";
 import fetchSubredditPosts from "./repositories/fetch-subreddit-threads";
 import useIntersect from "./hooks/use-intersect";
-import upvotePost from "./repositories/post-upvote-thread";
 import TabFilter from "./components/TabFilter";
 import ThreadCardLoader from "./components/ThreadCardLoader";
 import Layout from "../../components/Layout";
+import { Helmet } from "react-helmet-async";
 
 const VIEW_TYPE = [
   {
@@ -34,11 +34,7 @@ function Home() {
   const [loadingPagination, setLoadingPagination] = useState(false);
   const params = useParams();
   const [activeView, setActiveView] = useState("classic");
-  const { state, ...navP } = useNavigation();
-
-  console.log({
-    navP,
-  });
+  const { state } = useNavigation();
 
   useEffect(() => {
     setThreadList(data.threads.list);
@@ -81,16 +77,15 @@ function Home() {
     }
   });
 
-  const handleVote = () => {
-    upvotePost();
-  };
-
   const handleViewChange = ({ id }) => {
     setActiveView(id);
   };
 
   return (
     <Layout>
+      <Helmet>
+        <title>{data.details.subRedditName} | Reddit</title>
+      </Helmet>
       <h1>{data.details.subRedditName}</h1>
       <div
         style={{
@@ -131,7 +126,6 @@ function Home() {
                     upvotesTotal={threadItem.ups}
                     threadId={threadItem.id}
                     createdDate={buildCreatedDate(threadItem.created_utc)}
-                    onVote={handleVote}
                   />
                 </>
               );

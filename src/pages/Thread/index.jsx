@@ -3,6 +3,7 @@ import RecursiveReplies from "./components/RecursiveReplies";
 import buildCreatedDate from "../../factories/buildCreatedDate";
 import Layout from "../../components/Layout";
 import { Suspense } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Thread = () => {
   const { comments } = useLoaderData();
@@ -17,6 +18,9 @@ const Thread = () => {
             const threadComments = commentData?.[1].data;
             return (
               <article>
+                <Helmet>
+                  <title>{mainCommentData.title} | Reddit</title>
+                </Helmet>
                 <div>
                   <Link to={`/${mainCommentData.subreddit_name_prefixed}`}>
                     <b>{mainCommentData.subreddit_name_prefixed}</b>
