@@ -3,6 +3,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import express from "express";
 import { createServer as createViteServer } from "vite";
+import { debug } from "console";
+
+const PORT = 3000;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -68,7 +71,11 @@ async function createServer() {
     }
   });
 
-  app.listen(5173);
+  app.listen(PORT, () => {
+    debug(
+      `aether, the server-side renderer, running at http://localhost:${PORT}`
+    );
+  });
 }
 
 createServer();

@@ -7,4 +7,7 @@ export default defineConfig({
     target: "es2015",
   },
   plugins: [react()],
+  server: {
+    port: 3000,
+  },
 });
