@@ -50,7 +50,6 @@ async function createServer() {
 
       const appHtml = await render(req);
 
-      console.log("render", appHtml.html);
       // 5. Inject the app-rendered HTML into the template.
       const headHtml = `
         ${appHtml.helmet.title.toString()}

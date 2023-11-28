@@ -6,10 +6,10 @@ const TabFilter = (props) => {
   const { data, activeId, onTabChange } = props;
   return (
     <ul className={styles.container}>
-      {data.map(({ name, title, id, url }) => {
+      {data.map(({ name, title, id, url }, idx) => {
         return (
           <li
-            key={id}
+            key={`${id}-${idx}`}
             data-active={id === activeId}
             onClick={() => onTabChange({ title, id, url })}
           >

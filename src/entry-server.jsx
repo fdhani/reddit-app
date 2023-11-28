@@ -48,8 +48,6 @@ export async function render(req) {
   let { dataRoutes, query } = createStaticHandler(Routes);
   let fetchRequest = createFetchRequest(req);
 
-  console.log("HelmetProvider", HelmetProvider);
-
   let context = await query(fetchRequest);
   const router = createStaticRouter(dataRoutes, context);
 
