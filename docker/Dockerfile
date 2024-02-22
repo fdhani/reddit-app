@@ -1,10 +1,13 @@
 FROM node:18-alpine
 
-WORKDIR .
+WORKDIR ./code
 
-COPY ./package.json .
+COPY . .
 
 RUN npm install
-RUN npm run build
+
+RUN echo $(ls -1 ./node_modules/@types)
+
+RUN npm run build:client
 
 CMD ["node", "run", "server"]
