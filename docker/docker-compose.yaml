@@ -1,6 +1,7 @@
 version: "1"
 services:
   reddit-app:
+    container_name: reddit-app
     image: reddit-app
     restart: always
     ports:

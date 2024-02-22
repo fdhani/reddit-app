@@ -10,4 +10,4 @@ RUN echo $(ls -1 ./node_modules/@types)
 
 RUN npm run build:client
 
-CMD ["node", "run", "server"]
+CMD ["node", "server"]
