@@ -8,6 +8,7 @@ import TabFilter from "./components/TabFilter";
 import ThreadCardLoader from "./components/ThreadCardLoader";
 import Layout from "../../components/Layout";
 import { Helmet } from "react-helmet-async";
+import styles from "./index.module.scss";
 
 const VIEW_TYPE = [
   {
@@ -31,6 +32,7 @@ function Home() {
   const data = useLoaderData();
   const [threadList, setThreadList] = useState(data.threads.list);
   const [after, setAfter] = useState(data.threads.after);
+  const [search, setSearch] = useState("");
   const [loadingPagination, setLoadingPagination] = useState(false);
   const params = useParams();
   const [activeView, setActiveView] = useState("classic");
@@ -81,18 +83,43 @@ function Home() {
     setActiveView(id);
   };
 
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    if (search.length > 3) {
+      setThreadList((currThreadList) => {
+        const searchLc = search.toLocaleLowerCase();
+
+        const filteredThreadList = currThreadList.filter((threadItem) => {
+          const { title } = threadItem.data;
+          console.log("title", threadItem);
+          const titleLc = title.toLowerCase();
+
+          return titleLc.includes(searchLc);
+        });
+        console.log(filteredThreadList);
+
+        return filteredThreadList;
+      });
+    }
+  }, [search]);
+
   return (
     <Layout>
       <Helmet>
         <title>{data.details.subRedditName} | Reddit</title>
       </Helmet>
-      <h1>{data.details.subRedditName}</h1>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
+      <div>
+        <h1>{data.details.subRedditName}</h1>
+        <input
+          value={search}
+          placeholder="Input"
+          onChange={handleSearchChange}
+        />
+      </div>
+      <div className={styles.tabContainer}>
         <TabFilter
           data={filterTabs}
           activeId={(params?.filter || "top").toLowerCase()}
@@ -116,7 +143,9 @@ function Home() {
             {threadList.map(({ data: threadItem }, key) => {
               return (
                 <ThreadCard
+                  thumbnail={threadItem.thumbnail}
                   view={activeView}
+                  url={threadItem.url}
                   key={`${key}-${threadItem.id}`}
                   subRedditName={data.details.subRedditName}
                   title={threadItem.title}
@@ -128,7 +157,7 @@ function Home() {
                 />
               );
             })}
-            {after !== null && (
+            {after !== null && !search && (
               <div ref={ref}>
                 <ThreadCardLoader />
                 <ThreadCardLoader />

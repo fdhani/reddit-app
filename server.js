@@ -1,6 +1,6 @@
 import express from "express";
 import { debug } from "console";
-import rendererMiddleware from "./middlewares/renderer.js";
+import rendererMiddleware from "./server/middlewares/renderer.js";
 const isProduction = process.env.NODE_ENV === "production";
 const BASE = process.env.BASE || "/";
 const PORT = process.env.PORT || 3000;

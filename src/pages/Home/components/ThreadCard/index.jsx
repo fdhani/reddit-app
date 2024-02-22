@@ -9,7 +9,13 @@ const ThreadCard = (props) => {
   const { view, ...otherProps } = props;
 
   const handleVote = (vote) => {
-    setVote((currentVote) => (currentVote ? "" : vote));
+    setVote((currentVote) => {
+      if (currentVote) {
+        return vote;
+      }
+
+      return currentVote ? "" : vote;
+    });
   };
 
   let upvotesTotal = otherProps.upvotesTotal;

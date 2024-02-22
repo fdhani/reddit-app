@@ -3,6 +3,14 @@ import Icon from "../../../../../components/Icon";
 import Voting from "../../Vote";
 import styles from "../thread-card.module.scss";
 
+const checkIfExternalUrl = (url) => {
+  if (url.includes("https://i.redd.it")) {
+    return "internal";
+  }
+
+  return "external";
+};
+
 const ThreadCard = (props) => {
   const {
     threadId,
@@ -14,6 +22,8 @@ const ThreadCard = (props) => {
     upvotesTotal,
     onVote,
     vote,
+    url,
+    thumbnail,
   } = props;
   return (
     <article className={styles.containerCard}>
@@ -22,6 +32,11 @@ const ThreadCard = (props) => {
         <h1>
           <Link to={`/${subRedditName}/comments/${threadId}`}>{title}</Link>
         </h1>
+        {checkIfExternalUrl(url) === "external" ? (
+          <a href={url}>{url}</a>
+        ) : (
+          <img src={thumbnail} width="80px" height="auto" />
+        )}
 
         <span className={styles.txtPostInfo}>
           Posted by u/{author} | {createdDate}
